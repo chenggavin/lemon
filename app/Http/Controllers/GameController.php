@@ -13,8 +13,7 @@ class GameController extends Controller
      */
     public function index()
     {
-        //
-        $games = \App\Game:: all();
+        $games = \App\Game::all();
         return view('games.index');
     }
 
@@ -25,6 +24,17 @@ class GameController extends Controller
      */
     public function create()
     {
+        // Create a new game
+        $game = new \App\Game;
+        $game->user_id = \Auth::user()->id;
+        $game->save();
+
+        // Create day 1 for the new game
+
+
+        // TODO: user should go to the day 1 page for the new games
+        // so they can start playing!
+        return redirect()->route('home');
 
     }
 
@@ -47,7 +57,8 @@ class GameController extends Controller
      */
     public function show($id)
     {
-        //
+        $game = \App\Game::find($id);
+        return $game;
     }
 
     /**
